@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les fractions – Cours interactif | Sid KHALIFA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#fbf6e9;--card:#fffdf7;--ink:#1f2a44;--blue:#2c5aa0;--bl:#e8f0fb;--green:#2e8b57;--gl:#e4f4ea;--red:#c8553d;--rl:#fdeae6;--yel:#f6c945;--yl:#fff4cc;--line:#e3d9bd}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.65 Lexend,Verdana,sans-serif;background-image:linear-gradient(var(--line) 1px,transparent 1px);background-size:100% 34px;background-attachment:local}
+h1,h2,h3{font-family:Merriweather,Georgia,serif;line-height:1.3}
+header{background:var(--blue);color:#fff;border-bottom:6px solid var(--yel)}
+.hd{max-width:1000px;margin:auto;padding:16px 20px;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.hd img{height:84px;border-radius:10px;background:#fff;padding:4px}
+.hd h1{margin:0;font-size:1.6rem}.hd p{margin:2px 0 0;opacity:.92;font-size:.95rem}
+nav{max-width:1000px;margin:18px auto 0;padding:0 20px;display:flex;gap:12px;flex-wrap:wrap}
+nav button{flex:1;min-width:220px;font:700 1.1rem Lexend,sans-serif;padding:16px;border:3px solid var(--blue);border-radius:14px;background:var(--card);color:var(--blue);cursor:pointer;transition:.15s}
+nav button:hover{transform:translateY(-2px)}nav button.on{background:var(--blue);color:#fff;box-shadow:0 4px 0 #1c3f75}
+main{max-width:1000px;margin:auto;padding:20px}
+section.tab{display:none}section.tab.on{display:block}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.chips button{font:600 .95rem Lexend,sans-serif;padding:8px 14px;border-radius:999px;border:2px solid var(--green);background:var(--card);color:var(--green);cursor:pointer}
+.chips button.on{background:var(--green);color:#fff}
+.chap{display:none;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:8px 26px 24px;box-shadow:0 3px 0 var(--line)}.chap.on{display:block}
+.note{background:var(--bl);border-left:6px solid var(--blue);border-radius:8px;padding:12px 18px;margin:16px 0}
+.note b.t{color:var(--blue);display:block;font-family:Merriweather,serif}
+.ex{background:var(--yl);border-left:6px solid var(--yel);border-radius:8px;padding:12px 18px;margin:16px 0}
+.lab{background:var(--gl);border:2px dashed var(--green);border-radius:12px;padding:14px;margin:16px 0}
+.lab label{font-weight:600;margin-right:10px}
+select,input[type=number],input[type=text],input[type=email]{font:inherit;padding:6px 10px;border:2px solid var(--blue);border-radius:8px;background:#fff;color:var(--ink)}
+svg{max-width:100%;height:auto}
+.fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 .2em;line-height:1.2;font-size:.95em}
+.fr span:first-child{border-bottom:2px solid currentColor;padding:0 .3em}
+.bar{display:flex;margin:6px 0}.bar i{flex:1;height:34px;border:2px solid var(--ink);margin-left:-2px;background:#fff}.bar i.f1{background:#9bbcf0}.bar i.f2{background:#f5b3a6}
+.flow{display:flex;flex-direction:column;align-items:center;gap:6px;margin:16px 0}
+.flow div{border:2px solid var(--ink);border-radius:12px;padding:8px 18px;background:#fff;max-width:420px;text-align:center}.flow span{font-size:1.4rem;color:var(--blue)}
+table{border-collapse:collapse;margin:10px auto}td,th{border:2px solid var(--ink);padding:8px 18px;text-align:center}th{background:var(--gl)}
+.card{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin:14px 0;box-shadow:0 3px 0 var(--line)}
+.card .q{font-weight:600}.card .num{display:inline-block;background:var(--blue);color:#fff;border-radius:8px;padding:0 9px;margin-right:8px}
+.opts{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}.opts.col{flex-direction:column;align-items:flex-start}
+.opts button,.go{font:600 1rem Lexend,sans-serif;padding:9px 18px;border:2px solid var(--blue);border-radius:10px;background:#fff;color:var(--blue);cursor:pointer}
+.opts button:hover:not(:disabled),.go:hover:not(:disabled){background:var(--bl)}
+.go{background:var(--blue);color:#fff}.go:disabled{opacity:.5;cursor:default}
+button:disabled{cursor:default}
+.bl{width:3.2em;text-align:center;font:inherit;border:0;border-bottom:3px solid var(--blue);background:var(--yl);margin:0 2px}
+.fb{margin-top:10px;padding:10px 14px;border-radius:8px;display:none}
+.card.ok .fb{display:block;background:var(--gl);border-left:6px solid var(--green)}
+.card.ko .fb{display:block;background:var(--rl);border-left:6px solid var(--red)}
+.opts button.sel{border-width:4px}.opts button.good{background:var(--green);color:#fff;border-color:var(--green)}.opts button.bad{background:var(--red);color:#fff;border-color:var(--red)}
+.send{background:var(--card);border:3px solid var(--blue);border-radius:16px;padding:6px 22px 20px;margin-bottom:20px}
+.send .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.send label{display:block;font-weight:600;font-size:.9rem}.send input{width:100%}
+.send .go{background:var(--green);border-color:var(--green);font-size:1.1rem;padding:12px 24px;margin-top:14px}
+#msg{margin-top:10px;font-weight:600}
+.prog{height:14px;background:#e9e1c8;border-radius:9px;overflow:hidden}.prog div{height:100%;width:0;background:var(--green);transition:.3s}
+h2.sec{color:var(--blue);border-bottom:4px solid var(--yel);padding-bottom:4px;margin-top:34px}
+footer{text-align:center;padding:24px;font-size:.9rem;opacity:.8}
+</style>
+</head>
+<body>
+<header><div class="hd">
+<img src="data:image/png;base64,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" alt="Logo Sid KHALIFA">
+<div><h1>Les fractions – Cours interactif</h1><p>Page conçue par <b>Sid KHALIFA</b>, professeur de collège</p></div>
+</div></header>
+<nav>
+<button id="b1" class="on" onclick="tab(1)">📖 Explication du cours</button>
+<button id="b2" onclick="tab(2)">✏️ Entraînement</button>
+</nav>
+<main>
+<section class="tab on" id="t1">
+<div class="chips" id="chips"></div>
+
+<div class="chap on">
+<h2>1. Les fractions sur une droite graduée</h2>
+<div class="note"><b class="t">À retenir</b>Une fraction est composée de deux nombres :<br>• Le <b>dénominateur</b> (en bas) indique en combien de parts égales l'unité est coupée.<br>• Le <b>numérateur</b> (en haut) indique combien de parts on prend à partir de zéro.</div>
+<p>Pour placer une fraction sur une droite, on regarde d'abord le dénominateur. S'il vaut 4, on partage chaque unité (l'espace entre 0 et 1, entre 1 et 2, etc.) en 4 parts égales. Chaque petit trait représente alors un quart (<fr>1/4</fr>).</p>
+<p>Ensuite, on compte le nombre de parts indiqué par le numérateur en partant de 0. Par exemple, pour placer <fr>3/4</fr>, on avance de 3 petits traits.</p>
+<div class="ex"><b>Exemple commenté : placer <fr>5/3</fr></b><br>1. L'unité est coupée en 3 (tiers) car le dénominateur est 3.<br>2. On compte 5 petits traits depuis le zéro.<br>3. Comme 5 &gt; 3, le point se trouve après le nombre 1.</div>
+<div class="lab"><b>🔬 Teste toi-même :</b><br>
+<label>Numérateur <input type="number" id="ln" min="0" max="24" value="5" style="width:80px"></label>
+<label>Dénominateur <select id="ld"></select></label>
+<div id="line"></div></div>
+</div>
+
+<div class="chap">
+<h2>2. Trouver des fractions égales</h2>
+<div class="note"><b class="t">À retenir</b>Deux fractions sont <b>égales</b> (ou équivalentes) si elles représentent la même quantité, même si les nombres sont différents.<br><b>La règle d'or :</b> pour trouver une fraction égale, on <b>multiplie</b> ou on <b>divise</b> le numérateur et le dénominateur par le <b>même nombre</b>.</div>
+<p>Imagine deux gâteaux identiques. Si tu coupes le premier en 2 et en manges 1 part, tu as mangé la moitié (<fr>1/2</fr>). Si tu coupes le second en 4 et en manges 2 parts, tu as aussi mangé la moitié (<fr>2/4</fr>) ! Pour passer de <fr>1/2</fr> à <fr>2/4</fr>, on a multiplié le haut et le bas par 2 : <fr>1 × 2/2 × 2</fr> = <fr>2/4</fr>.</p>
+<div class="ex"><b>Exemple guidé : multiplier pour agrandir</b><br>Cherchons une fraction égale à <fr>3/5</fr> avec un dénominateur de 10.<br><b>Étape 1 :</b> par quoi multiplier 5 pour obtenir 10 ? Par 2 (5 × 2 = 10).<br><b>Étape 2 :</b> on applique la même multiplication au numérateur : <fr>3 × 2/5 × 2</fr> = <fr>6/10</fr>.<br><b>Pour diviser :</b> <fr>10/20</fr> = <fr>10 ÷ 10/20 ÷ 10</fr> = <fr>1/2</fr>.</div>
+<div class="lab"><b>🔬 Visualise :</b>
+<label>Fraction <select id="eb"><option>1/2</option><option selected>3/5</option><option>2/3</option><option>3/4</option><option>2/5</option></select></label>
+<label>Multiplier par <select id="ek"></select></label>
+<div id="eq"></div></div>
+</div>
+
+<div class="chap">
+<h2>3. Décomposition d'une fraction</h2>
+<div class="note"><b class="t">À retenir</b>Décomposer une fraction, c'est l'écrire comme la somme d'un <b>nombre entier</b> et d'une <b>fraction plus petite que 1</b>.<br>Exemple : <fr>7/3</fr> = 2 + <fr>1/3</fr></div>
+<p><b>La méthode pas à pas</b> pour <fr>13/4</fr> : on cherche combien de fois le dénominateur (4) rentre dans le numérateur (13).</p>
+<div class="flow"><div>Je cherche dans la table de 4 : 4 × 3 = 12. C'est le plus proche de 13.</div><span>↓</span><div>Le nombre entier est donc <b>3</b>.</div><span>↓</span><div>Il reste 1 pour aller jusqu'à 13 (13 − 12 = 1).</div><span>↓</span><div>Le résultat est <b>3 + <fr>1/4</fr></b></div></div>
+<div class="ex"><b>Exemple rédigé : décomposons <fr>17/5</fr></b><br>• Dans 17, il y a <b>3</b> fois 5 (car 5 × 3 = 15).<br>• Il reste <b>2</b> (car 17 − 15 = 2).<br>• Donc : <fr>17/5</fr> = 3 + <fr>2/5</fr>.</div>
+<p>⚠️ <b>Erreur fréquente :</b> <fr>9/4</fr> = 1 + <fr>5/4</fr> n'est pas terminé, car <fr>5/4</fr> est encore plus grand que 1. Il faut écrire <fr>9/4</fr> = 2 + <fr>1/4</fr>.</p>
+</div>
+
+<div class="chap">
+<h2>4. Additionner une fraction et un nombre décimal</h2>
+<div class="note"><b class="t">À retenir</b>Pour additionner une fraction et un nombre décimal, ils doivent parler la « même langue ». On transforme généralement le nombre décimal en <b>fraction décimale</b>.</div>
+<h3>Étape 1 : transformer le décimal en fraction</h3>
+<p>• S'il y a <b>1 chiffre</b> après la virgule, ce sont des <b>dixièmes</b> (dénominateur 10).<br>• S'il y a <b>2 chiffres</b>, ce sont des <b>centièmes</b> (dénominateur 100).<br>Exemple : 0,7 = <fr>7/10</fr> et 0,25 = <fr>25/100</fr>.</p>
+<table><tr><th colspan="4">Tableau de numération pour 0,5</th></tr><tr><th>Dizaines</th><th>Unités</th><th>Dixièmes</th><th>Centièmes</th></tr><tr><td>0</td><td>0</td><td>5</td><td></td></tr></table>
+<h3>Étape 2 : faire l'addition</h3>
+<p>Une fois que tout est en fractions, on met au même dénominateur si besoin (fractions égales).</p>
+<div class="ex"><b>Exemple rédigé : calculer <fr>3/10</fr> + 0,5</b><br>1. Je transforme 0,5 en fraction : 0,5 = <fr>5/10</fr>.<br>2. J'additionne : <fr>3/10</fr> + <fr>5/10</fr> = <fr>3 + 5/10</fr> = <fr>8/10</fr>.</div>
+<div class="ex"><b>Autre exemple : <fr>25/100</fr> + 0,3</b><br>0,3 = <fr>3/10</fr> = <fr>30/100</fr> ; puis <fr>25/100</fr> + <fr>30/100</fr> = <fr>55/100</fr>.</div>
+</div>
+</section>
+
+<section class="tab" id="t2">
+<div class="send">
+<h3>📨 Envoyer mon travail à mon professeur</h3>
+<div class="row">
+<div><label for="pn">Mon prénom</label><input type="text" id="pn" placeholder="Ex : Léa"></div>
+<div><label for="se">Mon e-mail</label><input type="email" id="se" placeholder="eleve@exemple.fr"></div>
+<div><label for="te">E-mail de mon professeur</label><input type="email" id="te" placeholder="prof@exemple.fr"></div>
+</div>
+<button class="go" onclick="send()">📨 Envoyer l'exercice réalisé</button>
+<div id="msg"></div>
+<p style="margin:12px 0 4px;font-size:.9rem">Ma progression : <b id="pt">0 / 0</b> bonnes réponses · <span id="an">0</span> questions répondues</p>
+<div class="prog"><div id="pg"></div></div>
+</div>
+<p><i>Chaque question ne peut être validée qu'une seule fois : après ta réponse, la bonne réponse s'affiche, mais tu ne peux plus la modifier. Réfléchis bien !</i></p>
+<div id="exos"></div>
+</section>
+</main>
+<footer>© Page conçue par Sid KHALIFA, professeur de collège</footer>
+
+<script>
+const CFG={serviceId:'',templateId:'',publicKey:''}; /* EmailJS : voir explications fournies avec le site */
+const $=s=>document.querySelector(s);
+const fr=h=>h.replace(/<fr>(.*?)<\/fr>/g,(m,a)=>{const i=a.lastIndexOf('/');return `<span class="fr"><span>${a.slice(0,i)}</span><span>${a.slice(i+1)}</span></span>`});
+const plain=h=>h.replace(/<fr>(.*?)<\/fr>/g,'$1').replace(/<[^>]+>/g,'');
+document.querySelectorAll('#t1 .chap').forEach(c=>c.innerHTML=fr(c.innerHTML));
+function tab(n){[1,2].forEach(i=>{$('#t'+i).classList.toggle('on',i==n);$('#b'+i).classList.toggle('on',i==n)})}
+/* chapitres */
+const names=['Droite graduée','Fractions égales','Décomposition','Fraction + décimal'];
+const chaps=document.querySelectorAll('.chap');
+names.forEach((t,i)=>{const b=document.createElement('button');b.textContent=(i+1)+'. '+t;if(!i)b.className='on';b.onclick=()=>{chaps.forEach((c,j)=>c.classList.toggle('on',i==j));[...$('#chips').children].forEach((x,j)=>x.classList.toggle('on',i==j))};$('#chips').append(b)});
+/* droite graduée */
+for(let d=2;d<=10;d++)$('#ld').innerHTML+=`<option ${d==3?'selected':''}>${d}</option>`;
+function line(){const d=+$('#ld').value;let n=Math.max(0,Math.min(3*d,+$('#ln').value||0));const M=Math.max(2,Math.ceil(n/d)),L=30,W=640,x=i=>L+i*W/(M*d),y=100;
+let s=`<svg viewBox="0 0 700 170"><line x1="12" y1="${y}" x2="690" y2="${y}" stroke="#1f2a44" stroke-width="3"/><path d="M690 ${y} l-12 -7 v14z" fill="#1f2a44"/>`;
+for(let i=0;i<=M*d;i++){const g=i%d==0;s+=`<line x1="${x(i)}" x2="${x(i)}" y1="${y-(g?14:8)}" y2="${y+(g?14:8)}" stroke="#1f2a44" stroke-width="2"/>`;if(g)s+=`<text x="${x(i)}" y="${y+38}" text-anchor="middle" font-size="22" fill="#1f2a44">${i/d}</text>`}
+if(n>0){const px=x(n);s+=`<path d="M${x(0)} ${y} Q${(x(0)+px)/2} ${y-110} ${px} ${y-6}" fill="none" stroke="#2c5aa0" stroke-width="3"/><text x="${(x(0)+px)/2}" y="${y-70}" text-anchor="middle" font-size="16" font-weight="700" fill="#2c5aa0">${n} bond${n>1?'s':''} de 1/${d}</text>`}
+s+=`<circle cx="${x(n)}" cy="${y}" r="8" fill="#c8553d"/></svg>`;
+$('#line').innerHTML=s+`<p>Le point est à l'abscisse ${fr(`<fr>${n}/${d}</fr>`)} ≈ ${(n/d).toFixed(2).replace('.',',')} — ${n>d?`comme ${n} &gt; ${d}, il est après 1.`:n==d?'il est exactement sur 1.':'il est avant 1.'}</p>`}
+$('#ln').oninput=$('#ld').onchange=line;line();
+/* fractions égales */
+for(let k=1;k<=6;k++)$('#ek').innerHTML+=`<option ${k==2?'selected':''}>${k}</option>`;
+function eq(){const[n,d]=$('#eb').value.split('/').map(Number),k=+$('#ek').value,bar=(a,b,c)=>`<div class="bar">${Array.from({length:b},(_,i)=>`<i class="${i<a?c:''}"></i>`).join('')}</div>`;
+$('#eq').innerHTML=fr(`<fr>${n}/${d}</fr>`)+bar(n,d,'f1')+fr(`<fr>${n} × ${k}/${d} × ${k}</fr>`)+' = '+fr(`<fr>${n*k}/${d*k}</fr>`)+bar(n*k,d*k,'f2')}
+$('#eb').onchange=$('#ek').onchange=eq;eq();
+
+/* ===== EXERCICES ===== */
+const TF=[
+['Le dénominateur indique combien de parts on prend à partir de zéro.',false,'C\'est le numérateur qui indique le nombre de parts prises. Le dénominateur indique en combien de parts égales l\'unité est coupée.'],
+['La fraction <fr>5/3</fr> se place après le nombre 1 sur la droite graduée.',true,'5 &gt; 3 : on avance de 5 tiers, donc au-delà de 1 (= 3 tiers).'],
+['<fr>4/6</fr> = <fr>2/3</fr>',true,'On divise le haut et le bas par 2.'],
+['Pour trouver une fraction égale, on peut ajouter le même nombre en haut et en bas.',false,'Il faut <b>multiplier</b> ou <b>diviser</b> le haut et le bas par le même nombre.'],
+['<fr>9/4</fr> = 1 + <fr>5/4</fr> est une décomposition terminée.',false,'<fr>5/4</fr> est encore supérieur à 1 : <fr>9/4</fr> = 2 + <fr>1/4</fr>.'],
+['0,25 = <fr>25/100</fr>',true,'Deux chiffres après la virgule : ce sont des centièmes.'],
+['<fr>1/2</fr> + 0,5 = <fr>1,5/2</fr>',false,'On ne peut pas ajouter un décimal au numérateur. 0,5 = <fr>1/2</fr>, donc la somme vaut <fr>2/2</fr> = 1.'],
+['Sarah a mangé 0,5 d\'une tablette et Marc <fr>2/4</fr> : ils ont mangé la même quantité.',true,'0,5 = <fr>5/10</fr> = <fr>1/2</fr> et <fr>2/4</fr> = <fr>1/2</fr>.']];
+const QCM=[
+['Pour placer <fr>7/8</fr>, en combien de parts égales coupe-t-on chaque unité ?',['En 8 parts égales','En 7 parts égales','En 15 parts égales'],0,'Le dénominateur (8) donne le nombre de parts par unité.'],
+['L\'unité est coupée en 5 parts égales. Quelle est l\'abscisse du point situé au 3<sup>e</sup> trait après 0 ?',['<fr>3/5</fr>','<fr>5/3</fr>','<fr>3/6</fr>','<fr>6/5</fr>'],0,'5 parts par unité, on avance de 3 : <fr>3/5</fr> (= 0,6).'],
+['Parmi ces fractions, laquelle est égale à <fr>5/10</fr> ?',['<fr>50/10</fr>','<fr>10/15</fr>','<fr>1/2</fr>'],2,'On divise le haut et le bas par 5 : <fr>5/10</fr> = <fr>1/2</fr>.'],
+['Léo a écrit <fr>9/4</fr> = 1 + <fr>5/4</fr>. Pourquoi sa décomposition n\'est-elle pas terminée ?',['Parce que la fraction <fr>5/4</fr> est plus grande que 1','Parce que 9 n\'est pas dans la table de 4','Parce qu\'il a oublié de multiplier par 2'],0,'Une décomposition doit se terminer par une fraction inférieure à 1.'],
+['Lucas écrit « <fr>1/2</fr> + 0,5 = <fr>1,5/2</fr> ». Pourquoi est-ce faux ?',['Le résultat est correct','Il a multiplié le dénominateur par 0,5','Il a ajouté le décimal directement au numérateur sans convertir'],2,'Il faut d\'abord convertir 0,5 en fraction.'],
+['Comment s\'écrit <fr>3/4</fr> en centièmes ?',['<fr>34/100</fr>','<fr>75/100</fr>','<fr>3/100</fr>'],1,'4 × 25 = 100, donc 3 × 25 = 75.']];
+const FILL=[
+['Complète : a) <fr>1/2</fr> = <fr>__/4</fr> &nbsp; b) <fr>2/3</fr> = <fr>6/__</fr> &nbsp; c) <fr>10/20</fr> = <fr>__/2</fr>',[2,9,1],'a) × 2 → 2 ; b) × 3 → 9 ; c) ÷ 10 → 1.'],
+['Décompose : <fr>14/3</fr> = __ + <fr>__/3</fr>',[4,2],'3 × 4 = 12 et 14 − 12 = 2.'],
+['Transforme : 0,7 = <fr>__/10</fr> et 0,09 = <fr>9/__</fr>',[7,100],'1 chiffre → dixièmes ; 2 chiffres → centièmes.'],
+['Calcule : <fr>3/10</fr> + 0,5 = <fr>3/10</fr> + <fr>__/10</fr> = <fr>__/10</fr>',[5,8],'0,5 = <fr>5/10</fr> ; 3 + 5 = 8.'],
+['Calcule : <fr>25/100</fr> + 0,3 = <fr>25/100</fr> + <fr>__/100</fr> = <fr>__/100</fr>',[30,55],'0,3 = <fr>3/10</fr> = <fr>30/100</fr> ; 25 + 30 = 55.']];
+const SH=[
+['Décompose <fr>13/4</fr> en un entier plus une fraction inférieure à 1 (écris par ex. 2 + 1/5).',/^3\+1\/4$/,'3 + 1/4','4 × 3 = 12 et 13 − 12 = 1.'],
+['Tu as 13 quarts de pizza. Combien de pizzas entières peux-tu former ?',/^3(pizzas?)?(entieres?)?$/,'3 pizzas entières (il reste 1 quart)','13 = 3 × 4 + 1.'],
+['Calcule <fr>12/100</fr> + 0,4 (réponse en fraction).',/^(52\/100|26\/50|13\/25|0\.52)$/,'52/100','0,4 = <fr>40/100</fr> ; 12 + 40 = 52.'],
+['Un randonneur a parcouru <fr>3/4</fr> de lieue le matin et 0,5 lieue l\'après-midi. Distance totale ?',/^(125\/100|5\/4|1\.25)(lieues?)?$/,'125/100 (soit 5/4)','<fr>3/4</fr> = <fr>75/100</fr>, 0,5 = <fr>50/100</fr> ; 75 + 50 = 125.'],
+['Sarah a mangé 0,5 d\'une tablette, Marc <fr>2/4</fr>. Qui a mangé le plus ?',/(meme|autant|egal|personne|aucun)/,'Personne : ils ont mangé la même quantité','0,5 = <fr>1/2</fr> et <fr>2/4</fr> = <fr>1/2</fr>.']];
+const norm=s=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'').replace(/,/g,'.').replace(/÷/g,'/');
+const R={};let N=0,TOTAL=TF.length+QCM.length+FILL.length+SH.length;
+function mk(t,q,body){const id='q'+(++N);return `<div class="card" id="${id}"><div class="q"><span class="num">${N}</span>${fr(q)}</div>${body(id)}<div class="fb"></div></div>`}
+function done(id,type,q,ok,given,ans,ex){const c=$('#'+id);c.classList.add(ok?'ok':'ko');c.querySelectorAll('button,input').forEach(e=>e.disabled=true);
+c.querySelector('.fb').innerHTML=fr((ok?'✅ <b>Bravo !</b> ':'❌ <b>Pas tout à fait.</b> La bonne réponse est : <b>'+ans+'</b>. ')+ex);
+R[id]={type,q:plain(q),given:plain(String(given)),ans:plain(String(ans)),ok};refresh()}
+function refresh(){const a=Object.values(R),s=a.filter(x=>x.ok).length;$('#pt').textContent=s+' / '+TOTAL;$('#an').textContent=a.length;$('#pg').style.width=(a.length/TOTAL*100)+'%'}
+let h='<h2 class="sec">🔎 Vrai ou faux ?</h2>';
+TF.forEach(([q,a,ex],k)=>h+=mk('tf',q,id=>`<div class="opts"><button onclick="tf('${id}',${k},true,this)">Vrai</button><button onclick="tf('${id}',${k},false,this)">Faux</button></div>`));
+h+='<h2 class="sec">🔘 QCM</h2>';
+QCM.forEach(([q,o,a,ex],k)=>h+=mk('qcm',q,id=>`<div class="opts col">${o.map((t,i)=>`<button onclick="qcm('${id}',${k},${i},this)">${String.fromCharCode(65+i)}) ${fr(t)}</button>`).join('')}</div>`));
+h+='<h2 class="sec">✍️ Compléter les vides</h2>';
+FILL.forEach(([q,b,ex],k)=>h+=mk('fill',q.replace(/__/g,'<input class="bl" inputmode="numeric">'),id=>`<div class="opts"><button class="go" onclick="fill('${id}',${k})">Valider</button></div>`));
+h+='<h2 class="sec">💬 Réponses courtes</h2>';
+SH.forEach(([q,re,ans,ex],k)=>h+=mk('short',q,id=>`<div class="opts"><input type="text" style="min-width:240px" placeholder="Ta réponse…" onkeydown="if(event.key=='Enter')sh('${id}',${k})"><button class="go" onclick="sh('${id}',${k})">Valider</button></div>`));
+$('#exos').innerHTML=h;
+const Q=id=>$('#'+id+' .q').innerHTML.replace(/<span class="num">\d+<\/span>/,'').replace(/<span class="fr"><span>(.*?)<\/span><span>(.*?)<\/span><\/span>/g,'<fr>$1/$2</fr>');
+function tf(id,k,v,b){const[q,a,ex]=TF[k];b.classList.add(v==a?'good':'bad');done(id,'Vrai/Faux',Q(id),v==a,v?'Vrai':'Faux',a?'Vrai':'Faux',ex)}
+function qcm(id,k,i,b){const[q,o,a,ex]=QCM[k];b.parentNode.children[a].classList.add('good');if(i!=a)b.classList.add('bad');done(id,'QCM',Q(id),i==a,plain(o[i]),plain(o[a]),ex)}
+function fill(id,k){const[q,b,ex]=FILL[k],ins=[...document.querySelectorAll('#'+id+' input')],v=ins.map(i=>i.value.trim());if(v.some(x=>!x)){alert('Remplis toutes les cases avant de valider.');return}
+let ok=true;ins.forEach((i,j)=>{const g=norm(v[j])==String(b[j]);i.style.background=g?'#bfe6cb':'#f6c4ba';ok&=g});
+done(id,'Compléter',Q(id).replace(/<input[^>]*>/g,'__'),!!ok,v.join(' ; '),b.join(' ; '),ex)}
+function sh(id,k){const[q,re,ans,ex]=SH[k],v=$('#'+id+' input').value.trim();if(!v){alert('Écris une réponse avant de valider.');return}
+done(id,'Réponse courte',Q(id),re.test(norm(v)),v,ans,ex)}
+/* envoi */
+function report(){const p=$('#pn').value.trim(),a=Object.values(R),s=a.filter(x=>x.ok).length;
+let t=`Exercices – Les fractions\nÉlève : ${p}\nScore : ${s} / ${TOTAL} (${a.length} questions répondues)\n\n`;
+a.forEach((x,i)=>t+=`${i+1}. [${x.type}] ${x.q}\n   Réponse de l'élève : ${x.given}\n   ${x.ok?'✔ Correct':'✘ Incorrect – bonne réponse : '+x.ans}\n\n`);return t}
+async function send(){const m=$('#msg'),p=$('#pn').value.trim(),se=$('#se').value.trim(),te=$('#te').value.trim(),ok=e=>/^\S+@\S+\.\S+$/.test(e);
+m.style.color='#c8553d';
+if(!p){m.textContent='Merci d\'indiquer ton prénom.';return}
+if(!ok(se)||!ok(te)){m.textContent='Vérifie ton adresse e-mail et celle de ton professeur.';return}
+if(!Object.keys(R).length){m.textContent='Réponds à au moins une question avant d\'envoyer.';return}
+const msg=report();
+if(!CFG.publicKey){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([msg],{type:'text/plain;charset=utf-8'}));a.download='exercices-fractions-'+p+'.txt';a.click();
+m.textContent='⚠️ L\'envoi automatique n\'est pas encore activé sur cette page : ton compte rendu a été téléchargé, envoie-le à ton professeur.';return}
+m.style.color='#1f2a44';m.textContent='Envoi en cours…';
+try{const r=await fetch('https://api.emailjs.com/api/v1.0/email/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({service_id:CFG.serviceId,template_id:CFG.templateId,user_id:CFG.publicKey,template_params:{to_email:te,from_name:p,from_email:se,reply_to:se,subject:'Exercices sur les fractions – '+p,message:msg}})});
+if(!r.ok)throw 0;m.style.color='#2e8b57';m.textContent='✅ Exercice envoyé à ton professeur !'}catch(e){m.style.color='#c8553d';m.textContent='❌ Échec de l\'envoi. Vérifie ta connexion et réessaie.'}}
+refresh();
+</script>
+</body>
+</html>
